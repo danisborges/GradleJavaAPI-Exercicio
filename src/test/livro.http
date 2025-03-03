@@ -1,0 +1,25 @@
+@url = https://fluffy-disco-vp655956v9hrj-8080.app.github.dev
+GET {{url}}/livros
+
+###
+GET {{url}}/livros/3
+
+###
+POST {{url}}/livros
+Content-Type: application/json
+
+{
+    "id": 3,
+    "titulo": "Sobre Meninos e Lobos"
+}
+
+###
+PUT {{url}}/livros/1
+Content-Type: application/json
+
+{
+    "descricao" : "Registro alterado novo"
+}
+
+###
+DELETE {{url}}/livros/2
