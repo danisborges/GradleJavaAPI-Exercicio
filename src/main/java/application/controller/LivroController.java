@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+//import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +31,7 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public LivroDTO getOne(@PathVariable int id) {
+    public LivroDTO getOne(@PathVariable long id) {
         Optional<Livro> resultado = livroRepo.findById(id);
         if(resultado.isEmpty()){
             throw new ResponseStatusException(
@@ -52,20 +52,22 @@ public class LivroController {
     }
 
     @PutMapping("/{id}")
-    public LivroDTO update(@RequestBody LivroDTO dados, @PathVariable int id) {
+    public LivroDTO update(@RequestBody LivroDTO dados, @PathVariable long id) {
         Optional<Livro> resultado = livroRepo.findById(id);
         
-        if(resultado.isPresent()) {
+        if(resultado.isEmpty()) {
             throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Livro não encontrado"
             );
         }
         resultado.get().setTitulo(dados.titulo());
+        resultado.get().setGeneros(dados.generos());
+        resultado.get().setAutores(dados.autores());
         return new LivroDTO(livroRepo.save(resultado.get()));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable long id) {
         if(!livroRepo.existsById(id)) {
             throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Livro não encontrado"

@@ -1,25 +1,28 @@
-@url = https://fluffy-disco-vp655956v9hrj-8080.app.github.dev
-GET {{url}}/livros
+### Listar todos os livros
+GET http://localhost:8080/livros
 
-###
-GET {{url}}/livros/3
+### Buscar livro por ID
+GET http://localhost:8080/livros/3
 
-###
-POST {{url}}/livros
+### Adicionar um livro
+POST http://localhost:8080/livros
 Content-Type: application/json
 
 {
-    "id": 3,
-    "titulo": "Sobre Meninos e Lobos"
+  "titulo": "Dom Casmurro",
+  "generos": "Romance",
+  "autores": "Machado de Assis"
 }
 
-###
-PUT {{url}}/livros/1
+### Atualizar um livro
+PUT http://localhost:8080/livros/2
 Content-Type: application/json
 
 {
-    "descricao" : "Registro alterado novo"
+  "titulo": "Sobre Meninos e Lobos",
+  "generos": "Mistério, Ficção",
+  "autores": "Dennis Lehane"
 }
 
-###
-DELETE {{url}}/livros/2
+### Remover um livro
+DELETE http://localhost:8080/livros/2
